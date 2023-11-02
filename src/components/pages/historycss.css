@@ -1,0 +1,44 @@
+.filter label{
+    padding: 0 10px;
+}
+.filter input{
+    margin: 0 5px;
+}
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  .custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    width: 5%;
+  }
+  
+  .custom-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .custom-table tr:hover {
+    background-color: #ddd;
+  }
+
+    /* YourComponent.css */
+  
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      margin: 20px;
+    }
+  
+    .lb {
+      font-weight: bold;
+    }
