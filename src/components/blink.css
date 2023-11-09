@@ -1,0 +1,22 @@
+/* Định nghĩa keyframes cho hiệu ứng nhấp nháy */
+@keyframes blink {
+    0% {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        /* Màu đen */
+    }
+
+    50% {
+        box-shadow: red 0px 7px 29px 0px;
+    }
+
+    100% {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        /* Màu đen */
+    }
+}
+
+/* Áp dụng hiệu ứng nhấp nháy khi sử dụng lớp 'blink' */
+.blink {
+    animation: blink 1s ease-in-out infinite;
+    /* 1s là thời gian một chu kỳ, có thể điều chỉnh */
+}

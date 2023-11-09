@@ -26,83 +26,83 @@ import History from '../pages/History';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-    },
-    noStyles:{
-        textDecoration: 'none',
-        color: 'rgba(0, 0, 0, 0.87)',
-    },
-    appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-      zIndex: 1
-    },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
-    content: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3),
-      marginLeft: '330px',
-    },
-  }));
+  root: {
+    display: 'flex',
+  },
+  noStyles: {
+    textDecoration: 'none',
+    color: 'rgba(0, 0, 0, 0.87)',
+  },
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    zIndex: 1
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing(3),
+    marginLeft: '330px',
+  },
+}));
 const MainDrawer = () => {
-    const classes = useStyles();
-    return (
-        <div>
-            <CssBaseline />
-            <Header/>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                paper: classes.drawerPaper,
-                }}
-                anchor="left"
-                >
-                <div className={classes.toolbar} />
-                <Divider />
-                <List>
-                <Link to="/" className={classes.noStyles}>
-                    <ListItem button>
-                        <ListItemIcon>
-                        <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItem>
-                </Link>
-                
-                <Link to="/history" className={classes.noStyles}>
-                    <ListItem button>
-                        <ListItemIcon>
-                        <BorderAllIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="History" />
-                    </ListItem>
-                </Link>
-                <Link className={classes.noStyles}>
-                    <ListItem button>
-                        <ListItemIcon>
-                        <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Profile" />
-                    </ListItem>
-                </Link>
-                </List>
-                </Drawer>
-                <Container className={classes.content}>
-                    <div className={classes.toolbar} />
-                    <Main/>
-                </Container>
-        </div>
-    );
+  const classes = useStyles();
+  return (
+    <div>
+      <CssBaseline />
+      <Header />
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="left"
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          <Link to="/" className={classes.noStyles}>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItem>
+          </Link>
+
+          <Link to="/history" className={classes.noStyles}>
+            <ListItem button>
+              <ListItemIcon>
+                <BorderAllIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sensor History" />
+            </ListItem>
+          </Link>
+          <Link to="/onoffhistory" className={classes.noStyles}>
+            <ListItem button>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="On Off History" />
+            </ListItem>
+          </Link>
+        </List>
+      </Drawer>
+      <Container className={classes.content}>
+        <div className={classes.toolbar} />
+        <Main />
+      </Container>
+    </div>
+  );
 }
 export default MainDrawer;

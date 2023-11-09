@@ -5,8 +5,9 @@ import Historytest from './pages/Historytest';
 import History from './pages/History';
 const Main = (props) => (
     <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/history" element={<Historytest/>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/history" element={<Historytest />} />
+        <Route path="/onoffhistory" element={<History />} />
 
     </Routes>
 )

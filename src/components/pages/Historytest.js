@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './historycss.css';
 import axios from 'axios';
-import Data from '../homepageitems/data';
+
 function filterData(data, start, end) {
   return data.slice(start, end + 1);
 }
+
 const Historytest = () => {
-  // const lastData = Data();
-  // console.log(lastData); //
+  const [lastData, setlastData] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8888/api/latestData')
+      .then(response => {
+        setlastData(response.data);
+        // console.log(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+
 
   const itemsPerPage = 10;
   const [data, setData] = useState([]);
@@ -29,12 +39,12 @@ const Historytest = () => {
     const endTimeUnix = new Date(endTime).getTime() / 1000;
     console.log(startTimeUnix);
     console.log(endTimeUnix);
-
     // Gửi yêu cầu tìm kiếm dựa trên khoảng thời gian
     axios.get(`http://localhost:8888/api/data/history?startTime=${startTimeUnix}&endTime=${endTimeUnix}`)
       .then(response => {
         // Xử lý dữ liệu tìm kiếm ở đây
         setData(response.data);
+        setCurrentPage(0);
         console.log(data);
       })
       .catch(error => console.error(error));
@@ -55,39 +65,61 @@ const Historytest = () => {
       <table className='custom-table'>
         <thead>
           <tr>
-            <th>Thời gian</th>
+            <th>ID</th>
             <th>Nhiệt độ</th>
             <th>Độ ẩm</th>
             <th>Ánh sáng</th>
+            <th>Thời gian</th>
           </tr>
         </thead>
         <tbody>
           {currentData ? (
             currentData.length > 0 ? (
               currentData.map((item, index) => (
+
                 <tr key={index}>
-                  <td>{item.timestamp}</td>
+                  <td>{item.id}</td>
                   <td>{item.temperature}</td>
                   <td>{item.humidity}</td>
                   <td>{item.light}</td>
+                  <td>{item.timestamp}</td>
                 </tr>
+
               ))
             ) : (
+
               <tr>
                 <td colSpan="4">Không tìm thấy kết quả</td>
               </tr>
+
             )
           ) : (
-            <tr>
-              <td colSpan="4">Đang tìm kết quả</td>
-            </tr>
+            // <tr>
+            //   <td colSpan="4">Đang tìm kết quả</td>
+            // </tr>
+            lastData.map((item, index) => (
 
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.temperature}</td>
+                <td>{item.humidity}</td>
+                <td>{item.light}</td>
+                <td>{item.timestamp}</td>
+              </tr>
+
+            ))
           )}
         </tbody>
 
 
-        <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 0}>Trang trước</button>
-        <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === pagefilter.length - 1}>Trang tiếp theo</button>
+        {
+          (currentData && currentData.length > 0) ? (
+            <>
+              <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 0}>Trang trước</button>
+              <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === pagefilter.length - 1}>Trang tiếp theo</button>
+            </>
+          ) : (<></>)
+        }
       </table>
     </>
   );

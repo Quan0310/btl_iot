@@ -18,6 +18,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Badge from '@material-ui/core/Badge';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import Data from '../data';
+// import '../../blink.css';
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 400,
@@ -55,10 +56,10 @@ export default function Light() {
     setExpanded(!expanded);
   };
   const data = Data();
-  const lightcolor = `hsl(220, 100%, ${50 + ((data.length > 0 ? data[data.length - 1].humidity : 0) - 20) / 3}%)`;
+  const lightcolor = `hsl(220, 100%, ${((data.length > 0 ? data[data.length - 1].light : 0)) / 10}%)`;
 
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root} ${data.length > 0 ? (data[data.length - 1].light > 200 ? 'blink' : '') : ''}`}>
       <CardHeader
         className={classes.cardHeader}
         action={
@@ -70,7 +71,7 @@ export default function Light() {
       />
       <CardContent  >
         <Typography gutterBottom variant="h6" component="p">
-          <p className="taskCounter1" id="lightcolor" >{data.length > 0 ? data[data.length - 1].id : 0} Lux</p>
+          <p className="taskCounter1" id="lightcolor" style={{ color: lightcolor }}>{data.length > 0 ? data[data.length - 1].light : 0} Lux</p>
         </Typography>
         <p style={{ margin: '8px 0' }}>Integration</p>
 
